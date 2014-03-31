@@ -7,6 +7,7 @@
 package pkgVues;
 
 import java.awt.Container;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import pkgEntites.HibernateUtil;
 
@@ -42,6 +43,7 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         jmbTop = new javax.swing.JMenuBar();
         jmAccueil = new javax.swing.JMenu();
+        jmniPropos = new javax.swing.JMenuItem();
         jmniQuitter = new javax.swing.JMenuItem();
         jmEtablissement = new javax.swing.JMenu();
         jmniEtablissementConsulter = new javax.swing.JMenuItem();
@@ -58,6 +60,14 @@ public class jfPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jmAccueil.setText("Accueil");
+
+        jmniPropos.setText("A propos");
+        jmniPropos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmniProposActionPerformed(evt);
+            }
+        });
+        jmAccueil.add(jmniPropos);
 
         jmniQuitter.setText("Quitter");
         jmniQuitter.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +237,10 @@ public class jfPrincipal extends javax.swing.JFrame {
   
     }//GEN-LAST:event_jmEtablissementActionPerformed
 
+    private void jmniProposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniProposActionPerformed
+         JOptionPane.showMessageDialog(null, "Boisgontier Chloé \nBures Maxence");   // TODO add your handling code here:
+    }//GEN-LAST:event_jmniProposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,6 +290,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmniEtablissementAjout;
     private javax.swing.JMenuItem jmniEtablissementConsulter;
     private javax.swing.JMenuItem jmniHebergementConsulter;
+    private javax.swing.JMenuItem jmniPropos;
     private javax.swing.JMenuItem jmniQuitter;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,14 @@
             <Property name="text" type="java.lang.String" value="Accueil"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmniPropos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A propos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmniProposActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmniQuitter">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Quitter"/>
