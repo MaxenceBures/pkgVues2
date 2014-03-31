@@ -300,7 +300,7 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifActionPerformed
-        Byte type = 4;
+        Byte type = 3;
         String sReq = "from Etablissement Where Eta_Id = ?";
         Query q = jfPrincipal.getSession().createQuery(sReq);
         q.setParameter(0, jtxtid.getText());
