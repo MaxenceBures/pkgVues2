@@ -76,7 +76,7 @@ public class jpTest extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "TypeChambre", "Quantité"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
