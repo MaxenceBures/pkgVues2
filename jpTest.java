@@ -23,7 +23,7 @@ public class jpTest extends javax.swing.JPanel {
      */
     public jpTest() {
         initComponents();
-        //chargeTable();
+        chargeTable();
     }
 
     public void chargeListe(){
@@ -129,7 +129,7 @@ public class jpTest extends javax.swing.JPanel {
             for(i=0;i <nbligne; i++){
                 ((DefaultTableModel)jTable1.getModel()).removeRow(0);
             }
-        String sReq = "From OffreId ";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
+        String sReq = "From OffreId";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
         Query q = jfPrincipal.getSession().createQuery(sReq);
        // q.setParameter(0, jCbListeEtablissement.getSelectedItem());
         Iterator eta = q.iterate();
