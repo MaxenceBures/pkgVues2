@@ -129,9 +129,9 @@ public class jpTest extends javax.swing.JPanel {
             for(i=0;i <nbligne; i++){
                 ((DefaultTableModel)jTable1.getModel()).removeRow(0);
             }
-        String sReq = "From Offre";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
+        String sReq = "From Offre,Etablissement Where eta_id = off_etablissement and eta_nom = ?";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
         Query q = jfPrincipal.getSession().createQuery(sReq);
-       // q.setParameter(0, jCbListeEtablissement.getSelectedItem());
+        q.setParameter(0, jCbListeEtablissement.getSelectedItem());
         Iterator eta = q.iterate();
         while(eta.hasNext()){
             Offre unoffre = (Offre) eta.next();

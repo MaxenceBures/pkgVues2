@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import pkgEntites.Etablissement;
+import pkgEntites.TypeChambre;
 
 
 
@@ -74,6 +75,7 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
         jtxtrespnom = new javax.swing.JTextField();
         lblrespprenom = new javax.swing.JLabel();
         jtxtrespprenom = new javax.swing.JTextField();
+        jbtnSupp = new javax.swing.JButton();
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -176,6 +178,13 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
 
         lblrespprenom.setText("Prenom");
 
+        jbtnSupp.setText("Suppresion");
+        jbtnSupp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSuppActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,6 +194,8 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnSupp)
+                .addGap(42, 42, 42)
                 .addComponent(jbtnModif)
                 .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
@@ -294,7 +305,9 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
                     .addComponent(lblrespprenom)
                     .addComponent(jtxtrespprenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jbtnModif)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnModif)
+                    .addComponent(jbtnSupp))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -366,6 +379,21 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
   
                 // TODO add your handling code here:
     }//GEN-LAST:event_formMouseMoved
+
+    private void jbtnSuppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSuppActionPerformed
+           String sReq = "FROM Etablissement WHERE eta_id = ?";
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+        q.setParameter(0, jtxtid.getText());
+        
+        Etablissement unEtablissement = (Etablissement) q.uniqueResult();
+        jfPrincipal.getSession().delete(unEtablissement);
+        
+        Transaction tx = jfPrincipal.getSession().beginTransaction();
+        tx.commit();
+        jfPrincipal.getSession().update(unEtablissement);
+        
+        chargerTable();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnSuppActionPerformed
     private void chargerChamps(Object cellule){
         String sReq = "From Etablissement Where Eta_Id = ?";
         Query q = jfPrincipal.getSession().createQuery(sReq);
@@ -410,6 +438,7 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnModif;
+    private javax.swing.JButton jbtnSupp;
     private javax.swing.JComboBox jcbccivil;
     private javax.swing.JComboBox jcbctype;
     private javax.swing.JTextField jtxtadresse;
