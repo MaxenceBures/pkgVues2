@@ -85,14 +85,18 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblconsult.getTableHeader().setReorderingAllowed(false);
         tblconsult.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblconsultMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblconsult);
-        tblconsult.getColumnModel().getColumn(0).setResizable(false);
-        tblconsult.getColumnModel().getColumn(0).setPreferredWidth(40);
+        if (tblconsult.getColumnModel().getColumnCount() > 0) {
+            tblconsult.getColumnModel().getColumn(0).setResizable(false);
+            tblconsult.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblconsult.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
