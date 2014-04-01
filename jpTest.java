@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import pkgEntites.Etablissement;
 import pkgEntites.Offre;
-import pkgEntites.TypeChambre;
 
 /**
  *
@@ -24,6 +23,7 @@ public class jpTest extends javax.swing.JPanel {
      */
     public jpTest() {
         initComponents();
+        chargeTable();
     }
 
     public void chargeListe(){
@@ -108,31 +108,8 @@ public class jpTest extends javax.swing.JPanel {
 
     private void jCbListeEtablissementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbListeEtablissementActionPerformed
       
-      String sNom;
-    
-      String sQuery;
-      int l=0;
-      int inbligne;
-      int i;
-      inbligne = jTable1.getRowCount();
-        if(inbligne >0){
-            for(i=0;i<inbligne;i++){
-                ((DefaultTableModel)jTable1.getModel()).removeRow(0);
-            }
-          sNom = (String)jCbListeEtablissement.getSelectedItem();
-          sQuery = "From Offre,Etablissement Where eta_id = off_etablissement and eta_nom ='sNom' ";
-          jfPrincipal.getSession().beginTransaction();
-          Query q = jfPrincipal.getSession().createQuery(sQuery);
-        Iterator off = q.iterate();
-        while(off.hasNext()){
-            Offre unoffre = (Offre) off.next();
-            ((DefaultTableModel) jTable1.getModel()).addRow(new Object[] {unoffre.getId(), unoffre.getOffNbChambres()});
-
-        }   
-        }
-      
-      
-        
+        chargeTable();
+       
     }//GEN-LAST:event_jCbListeEtablissementActionPerformed
 
     private void jCbListeEtablissementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCbListeEtablissementMouseClicked
@@ -143,7 +120,28 @@ public class jpTest extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCbListeEtablissementItemStateChanged
 
+    private void chargeTable(){
+    
+       int nbligne;
+       int i;
+        nbligne = jTable1.getRowCount();
+        if(nbligne > 0){
+            for(i=0;i <nbligne; i++){
+                ((DefaultTableModel)jTable1.getModel()).removeRow(0);
+            }
+        String sReq = "From OffreId";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+       // q.setParameter(0, jCbListeEtablissement.getSelectedItem());
+        Iterator eta = q.iterate();
+        while(eta.hasNext()){
+            Offre unOffre = (Offre) eta.next();
+            ((DefaultTableModel) jTable1.getModel()).addRow(new Object[] {unOffre.getId(), unOffre.getOffNbChambres()});
 
+        }   
+        }
+          
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jCbListeEtablissement;
     private javax.swing.JScrollPane jScrollPane1;

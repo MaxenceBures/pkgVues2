@@ -385,7 +385,7 @@ public class jpEtablissementConsult extends javax.swing.JPanel {
     
     public void chargerTable(){
         
-       Etablissement unEtablissementTransfert = new Etablissement();
+      
        int nbligne;
        int i;
         nbligne = tblconsult.getRowCount();
