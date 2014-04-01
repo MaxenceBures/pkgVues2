@@ -7,8 +7,7 @@ package pkgVues;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import pkgEntites.HibernateUtil;
+import org.hibernate.Transaction;
 import pkgEntites.TypeChambre;
 
 /**
@@ -22,6 +21,7 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
      */
     public jpTypeChambreConsult() {
         initComponents();
+        jtxtid.disable();
     }
 
     /**
@@ -149,14 +149,25 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
 
     private void jbtnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifActionPerformed
         // TODO add your handling code here:
+        String sReq = "FROM TypeChambre WHERE TCh_Id = ?";
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+        q.setParameter(0, jtxtid.getText());
         
+        TypeChambre unTypeChambre = (TypeChambre) q.uniqueResult();
+        unTypeChambre.setTchLibelle(jtxtlibelle.getText());
+        
+        Transaction tx = jfPrincipal.getSession().beginTransaction();
+        tx.commit();
+        jfPrincipal.getSession().update(unTypeChambre);
+        
+        chargerTable();
     }//GEN-LAST:event_jbtnModifActionPerformed
 
     private void tblconsultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblconsultMouseClicked
         // TODO add your handling code here:
         int ligne = tblconsult.getSelectedRow();//Si tu veux la ligne selectionnée
         Object cellule = tblconsult.getValueAt(ligne,0);
-        String result = cellule.toString();
+        //String result = cellule.toString();
 
         chargerChamps(cellule);
        
