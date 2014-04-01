@@ -259,7 +259,7 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
         type = 0;
     }
    else if(jcbctype.getSelectedItem().toString() == "Ecole Privée")
-    {
+    { 
         type = 1;
     }
    else if(jcbctype.getSelectedItem().toString() == "Autres")
