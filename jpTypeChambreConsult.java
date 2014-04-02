@@ -5,6 +5,7 @@
 package pkgVues;
 
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
@@ -169,8 +170,8 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
         
         Transaction tx = jfPrincipal.getSession().beginTransaction();
         tx.commit();
-        jfPrincipal.getSession().update(unTypeChambre);
-        
+        jfPrincipal.getSession().update(unTypeChambre);       
+        //JOptionPane.showMessageDialog(null, "Type chambre modifié avec succès !");      
         chargerTable();
     }//GEN-LAST:event_jbtnModifActionPerformed
 
@@ -196,8 +197,8 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
         Transaction tx = jfPrincipal.getSession().beginTransaction();
         tx.commit();
         jfPrincipal.getSession().update(unTypeChambre);
-        
-        chargerTable();
+        //JOptionPane.showMessageDialog(null, "Type chambre supprimé avec succès !");
+        chargerTable() ;
     }//GEN-LAST:event_jbtnSupprActionPerformed
 
     private void chargerChamps(Object cellule){
