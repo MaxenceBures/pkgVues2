@@ -32,6 +32,8 @@ public class jpAccueil extends javax.swing.JPanel {
         lblAccueil = new javax.swing.JLabel();
         lblPresentation = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(415, 319));
+
         lblAccueil.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         lblAccueil.setText("Accueil");
 

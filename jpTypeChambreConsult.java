@@ -45,6 +45,8 @@ public class jpTypeChambreConsult extends javax.swing.JPanel {
         tblconsult = new javax.swing.JTable();
         jbtnSuppr = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(525, 574));
+
         lblconsult.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         lblconsult.setText("Consultation/Modification");
 
