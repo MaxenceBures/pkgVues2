@@ -70,6 +70,7 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
         jcbctype = new javax.swing.JComboBox();
         lbletablissement = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(600, 600));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -112,13 +113,27 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
 
         lblnom.setText("Nom");
 
-       
+        jtxtnom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtnomActionPerformed(evt);
+            }
+        });
 
         jcbccivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-               lblrespnom1.setText("Civilité");
+        jcbccivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbccivilActionPerformed(evt);
+            }
+        });
+
+        lblrespnom1.setText("Civilité");
 
         jcbctype.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-       
+        jcbctype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbctypeActionPerformed(evt);
+            }
+        });
 
         lbletablissement.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         lbletablissement.setText("Etablissement");
@@ -191,14 +206,14 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
                                                 .addComponent(jbtAjout)
                                                 .addGap(78, 78, 78))))
                                     .addComponent(jcbccivil, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(55, Short.MAX_VALUE))))
+                        .addContainerGap(79, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lbletablissement, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbletablissement, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtxtnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +242,7 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
                     .addComponent(jcbctype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbltype))
                 .addGap(18, 18, 18)
-                .addComponent(lblresponsable, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(lblresponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbccivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +255,7 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
                     .addComponent(jtxtrespprenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jbtAjout)
-                .addContainerGap())
+                .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -259,7 +274,7 @@ public class jpEtablissementAjout extends javax.swing.JPanel {
         type = 0;
     }
    else if(jcbctype.getSelectedItem().toString() == "Ecole Privée")
-    { 
+    {
         type = 1;
     }
    else if(jcbctype.getSelectedItem().toString() == "Autres")

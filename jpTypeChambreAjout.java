@@ -37,7 +37,7 @@ public class jpTypeChambreAjout extends javax.swing.JPanel {
         lbllibelle = new javax.swing.JLabel();
         jtxtlibelle = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(525, 574));
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         lbltypechambre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbltypechambre.setText("Type chambre");

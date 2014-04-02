@@ -61,6 +61,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jmniTest = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jmAccueil.setText("Accueil");
 
