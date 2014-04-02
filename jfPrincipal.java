@@ -199,6 +199,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jfPrincipal.session=psession;
     }
     private void jmniQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniQuitterActionPerformed
+        getSession().close();
         System.exit(0);
     }//GEN-LAST:event_jmniQuitterActionPerformed
 
