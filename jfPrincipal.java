@@ -21,7 +21,7 @@ public class jfPrincipal extends javax.swing.JFrame {
    protected jpEtablissementConsult pnlEtablissementConsult = new jpEtablissementConsult();
    protected jpTypeChambreAjout pnlTypeChambreAjout = new jpTypeChambreAjout();
    protected jpTypeChambreConsult pnlTypeChambreConsult = new jpTypeChambreConsult();
-   protected jpTest pnlTest = new jpTest();
+   protected jpHebergement pnlHebergement = new jpHebergement();
    protected jpAccueil pnlAccueil  = new jpAccueil();
    private Container pnlPrinc = null;
     /**
@@ -57,8 +57,6 @@ public class jfPrincipal extends javax.swing.JFrame {
         jmAttribution = new javax.swing.JMenu();
         jmniAttributionConsulter = new javax.swing.JMenuItem();
         jmniAttributionAjout = new javax.swing.JMenuItem();
-        jmTest = new javax.swing.JMenu();
-        jmniTest = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 600));
@@ -165,18 +163,6 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         jmbTop.add(jmAttribution);
 
-        jmTest.setText("Test");
-
-        jmniTest.setText("Consulter");
-        jmniTest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmniTestActionPerformed(evt);
-            }
-        });
-        jmTest.add(jmniTest);
-
-        jmbTop.add(jmTest);
-
         setJMenuBar(jmbTop);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,7 +215,9 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmniChambresAjoutActionPerformed
 
     private void jmniHebergementConsulterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniHebergementConsulterActionPerformed
-        // TODO add your handling code here:
+       this.setContentPane(pnlHebergement);
+       pnlHebergement.chargeListe();
+        pack(); // TODO add your handling code here:
     }//GEN-LAST:event_jmniHebergementConsulterActionPerformed
 
     private void jmniAttributionConsulterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniAttributionConsulterActionPerformed
@@ -257,12 +245,6 @@ public class jfPrincipal extends javax.swing.JFrame {
     private void jmniProposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniProposActionPerformed
          JOptionPane.showMessageDialog(null, "Boisgontier Chloé \nBures Maxence");   // TODO add your handling code here:
     }//GEN-LAST:event_jmniProposActionPerformed
-
-    private void jmniTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmniTestActionPerformed
-        this.setContentPane(pnlTest);
-        pnlTest.chargeListe();
-        pack();// TODO add your handling code here:
-    }//GEN-LAST:event_jmniTestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,7 +287,6 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmChambres;
     private javax.swing.JMenu jmEtablissement;
     private javax.swing.JMenu jmHebergement;
-    private javax.swing.JMenu jmTest;
     private javax.swing.JMenuBar jmbTop;
     private javax.swing.JMenuItem jmniAttributionAjout;
     private javax.swing.JMenuItem jmniAttributionConsulter;
@@ -316,6 +297,5 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmniHebergementConsulter;
     private javax.swing.JMenuItem jmniPropos;
     private javax.swing.JMenuItem jmniQuitter;
-    private javax.swing.JMenuItem jmniTest;
     // End of variables declaration//GEN-END:variables
 }
