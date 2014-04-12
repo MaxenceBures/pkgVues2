@@ -17,7 +17,8 @@ import pkgEntites.Offre;
  * @author Maxence
  */
 public class jpTest extends javax.swing.JPanel {
-
+        
+    private boolean bCharge = false;
     /**
      * Creates new form jpTest
      */
@@ -36,7 +37,7 @@ public class jpTest extends javax.swing.JPanel {
             jCbListeEtablissement.addItem(unEtablissement.getEtaNom());
             
         }
-        
+        bCharge = true;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,7 +114,7 @@ public class jpTest extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCbListeEtablissement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,14 +129,24 @@ public class jpTest extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCbListeEtablissementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbListeEtablissementActionPerformed
-      
-        chargeTable();
-       
+        if(bCharge){
+        String sEtablissementId;
+        //jtxtTest.setText(jCbListeEtablissement.getSelectedItem().toString());
+        String sReq = "from Etablissement Where Eta_Nom = ?";
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+        q.setParameter(0, jCbListeEtablissement.getSelectedItem().toString());
+            Etablissement unEtablissement = (Etablissement) q.uniqueResult();
+           // unEtablissement.setEtaId(jLblConsult.getText());
+            //jLblConsult.setText(unEtablissement.getEtaId());
+            sEtablissementId = unEtablissement.getEtaId();
+            chargeTable(sEtablissementId);
+        }
+        
     }//GEN-LAST:event_jCbListeEtablissementActionPerformed
 
     private void jCbListeEtablissementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCbListeEtablissementMouseClicked
@@ -156,7 +167,7 @@ public class jpTest extends javax.swing.JPanel {
         jtxtModif.setText(result); // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void chargeTable(){
+    private void chargeTable(String sEtablissementId){
     
        int nbligne;
        int i;
@@ -165,8 +176,9 @@ public class jpTest extends javax.swing.JPanel {
             for(i=0;i <nbligne; i++){
                 ((DefaultTableModel)jTable1.getModel()).removeRow(0);
             }
-        String sReq = "From Offre Order by off_etablissement, off_typechambre Asc";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
+        String sReq = "From Offre Where off_etablissement = ? Order by off_etablissement, off_typechambre Asc";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
         Query q = jfPrincipal.getSession().createQuery(sReq);
+         q.setParameter(0, sEtablissementId);
         //q.setParameter(0, jCbListeEtablissement.getSelectedItem());
         Iterator eta = q.iterate();
         while(eta.hasNext()){
