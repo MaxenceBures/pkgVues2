@@ -9,6 +9,7 @@ package pkgVues;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 import pkgEntites.Etablissement;
 import pkgEntites.Offre;
 
@@ -56,6 +57,8 @@ public class jpHebergement extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jtxtModif = new javax.swing.JTextField();
         jlblQuantite = new javax.swing.JLabel();
+        jbtnModif = new javax.swing.JButton();
+        jtxtModif1 = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -111,6 +114,15 @@ public class jpHebergement extends javax.swing.JPanel {
 
         jlblQuantite.setText("Quantité");
 
+        jbtnModif.setText("Modification");
+        jbtnModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnModifActionPerformed(evt);
+            }
+        });
+
+        jtxtModif1.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,8 +140,13 @@ public class jpHebergement extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addComponent(jlblQuantite)
                         .addGap(28, 28, 28)
-                        .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(230, Short.MAX_VALUE))
+                        .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(jbtnModif))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jtxtModif1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +158,11 @@ public class jpHebergement extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblQuantite))
-                .addContainerGap(338, Short.MAX_VALUE))
+                    .addComponent(jlblQuantite)
+                    .addComponent(jbtnModif))
+                .addGap(36, 36, 36)
+                .addComponent(jtxtModif1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(272, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -173,12 +193,29 @@ public class jpHebergement extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int ligne = jTable1.getSelectedRow();//Si tu veut la ligne selectionnée
         Object cellule = jTable1.getValueAt(ligne,2);
-       String result = cellule.toString();
+        Object cellule2 = jTable1.getValueAt(ligne,1);
+        String result = cellule.toString();
+        String result2 = cellule2.toString();
+        jtxtModif1.setText(result2);
       // result = 
        // System.out.println(result);
                 
         jtxtModif.setText(result); // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jbtnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifActionPerformed
+        String sReq = "from Offre Where Off_Etablissement = '"+sEtablissementId+"' And Off_TypeChambre = '"+jtxtModif1.getText()+"'";
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+        Offre unOffre = (Offre) q.uniqueResult();
+        unOffre.setOffNbChambres(Integer.parseInt(jtxtModif.getText()));
+       
+        Transaction tx = jfPrincipal.getSession().beginTransaction();
+        tx.commit();
+        jfPrincipal.getSession().update (unOffre);
+        chargeTable(sEtablissementId);
+        // txatest.setText(sResultat);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnModifActionPerformed
 
     private void chargeTable(String sEtablissementId){
     
@@ -207,7 +244,9 @@ public class jpHebergement extends javax.swing.JPanel {
     private javax.swing.JComboBox jCbListeEtablissement;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtnModif;
     private javax.swing.JLabel jlblQuantite;
     private javax.swing.JTextField jtxtModif;
+    private javax.swing.JTextField jtxtModif1;
     // End of variables declaration//GEN-END:variables
 }
