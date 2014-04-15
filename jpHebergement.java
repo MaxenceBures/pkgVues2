@@ -28,19 +28,19 @@ public class jpHebergement extends javax.swing.JPanel {
      */
     public jpHebergement() {
         initComponents();
-       // chargeTable();
+       
     }
 
     public void chargeListe(){
         String sReq = "From Etablissement";
-         Query q = jfPrincipal.getSession().createQuery(sReq);
-         jCbListeEtablissement.removeAllItems();
-         Iterator eta = q.iterate();
-         while(eta.hasNext()){
-            Etablissement unEtablissement = (Etablissement) eta.next();
-            jCbListeEtablissement.addItem(unEtablissement.getEtaNom());
-            
-        }
+        Query q = jfPrincipal.getSession().createQuery(sReq);
+        jCbListeEtablissement.removeAllItems();
+        Iterator eta = q.iterate();
+        while(eta.hasNext())
+           {
+           Etablissement unEtablissement = (Etablissement) eta.next();
+           jCbListeEtablissement.addItem(unEtablissement.getEtaNom());
+           }
         bCharge = true;
     }
     /**
@@ -54,11 +54,10 @@ public class jpHebergement extends javax.swing.JPanel {
 
         jCbListeEtablissement = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblHebergement = new javax.swing.JTable();
         jtxtModif = new javax.swing.JTextField();
         jlblQuantite = new javax.swing.JLabel();
         jbtnModif = new javax.swing.JButton();
-        jtxtModif1 = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -79,7 +78,7 @@ public class jpHebergement extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblHebergement.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -98,16 +97,16 @@ public class jpHebergement extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTblHebergement.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTblHebergementMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(jTblHebergement);
+        if (jTblHebergement.getColumnModel().getColumnCount() > 0) {
+            jTblHebergement.getColumnModel().getColumn(0).setResizable(false);
+            jTblHebergement.getColumnModel().getColumn(1).setResizable(false);
+            jTblHebergement.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jtxtModif.setText("jTextField1");
@@ -120,8 +119,6 @@ public class jpHebergement extends javax.swing.JPanel {
                 jbtnModifActionPerformed(evt);
             }
         });
-
-        jtxtModif1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,10 +139,7 @@ public class jpHebergement extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)
-                        .addComponent(jbtnModif))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jtxtModif1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnModif)))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,26 +154,20 @@ public class jpHebergement extends javax.swing.JPanel {
                     .addComponent(jtxtModif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblQuantite)
                     .addComponent(jbtnModif))
-                .addGap(36, 36, 36)
-                .addComponent(jtxtModif1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCbListeEtablissementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbListeEtablissementActionPerformed
-        if(bCharge){
-        //String sEtablissementId;
-        //jtxtTest.setText(jCbListeEtablissement.getSelectedItem().toString());
-        String sReq = "from Etablissement Where Eta_Nom = ?";
-        Query q = jfPrincipal.getSession().createQuery(sReq);
-        q.setParameter(0, jCbListeEtablissement.getSelectedItem().toString());
+        if(bCharge)
+            {
+            String sReq = "from Etablissement Where Eta_Nom = ?";
+            Query q = jfPrincipal.getSession().createQuery(sReq);
+            q.setParameter(0, jCbListeEtablissement.getSelectedItem().toString());
             Etablissement unEtablissement = (Etablissement) q.uniqueResult();
-           // unEtablissement.setEtaId(jLblConsult.getText());
-            //jLblConsult.setText(unEtablissement.getEtaId());
             sEtablissementId = unEtablissement.getEtaId();
             chargeTable(sEtablissementId);
-        }
-        
+            }
     }//GEN-LAST:event_jCbListeEtablissementActionPerformed
 
     private void jCbListeEtablissementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCbListeEtablissementMouseClicked
@@ -190,63 +178,52 @@ public class jpHebergement extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCbListeEtablissementItemStateChanged
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int ligne = jTable1.getSelectedRow();//Si tu veut la ligne selectionnée
-        Object cellule = jTable1.getValueAt(ligne,2);
-        Object cellule2 = jTable1.getValueAt(ligne,1);
-        String result = cellule.toString();
-        String result2 = cellule2.toString();
-        jtxtModif1.setText(result2);
-      // result = 
-       // System.out.println(result);
-                
-        jtxtModif.setText(result); // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void jTblHebergementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblHebergementMouseClicked
+        int ligne = jTblHebergement.getSelectedRow();
+        Object celluleQuantite = jTblHebergement.getValueAt(ligne,2);
+        Object celluleChambre = jTblHebergement.getValueAt(ligne,1);
+        sChambresId = celluleChambre.toString();
+        jtxtModif.setText(celluleQuantite.toString()); // TODO add your handling code here:
+    }//GEN-LAST:event_jTblHebergementMouseClicked
 
     private void jbtnModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifActionPerformed
-        String sReq = "from Offre Where Off_Etablissement = '"+sEtablissementId+"' And Off_TypeChambre = '"+jtxtModif1.getText()+"'";
+        String sReq = "from Offre Where Off_Etablissement = '"+sEtablissementId+"' And Off_TypeChambre = '"+sChambresId+"'";
         Query q = jfPrincipal.getSession().createQuery(sReq);
         Offre unOffre = (Offre) q.uniqueResult();
         unOffre.setOffNbChambres(Integer.parseInt(jtxtModif.getText()));
-       
         Transaction tx = jfPrincipal.getSession().beginTransaction();
         tx.commit();
         jfPrincipal.getSession().update (unOffre);
         chargeTable(sEtablissementId);
-        // txatest.setText(sResultat);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jbtnModifActionPerformed
 
     private void chargeTable(String sEtablissementId){
-    
-       int nbligne;
-       int i;
-        nbligne = jTable1.getRowCount();
-        if(nbligne > 0){
+        int nbligne;
+        int i;
+        nbligne = jTblHebergement.getRowCount();
+        if(nbligne > 0)
+            {
             for(i=0;i <nbligne; i++){
-                ((DefaultTableModel)jTable1.getModel()).removeRow(0);
+                ((DefaultTableModel)jTblHebergement.getModel()).removeRow(0);
             }
         String sReq = "From Offre Where off_etablissement = ? Order by off_etablissement, off_typechambre Asc";//,Etablissement Where eta_id = off_etablissement and eta_nom = ?
         Query q = jfPrincipal.getSession().createQuery(sReq);
-         q.setParameter(0, sEtablissementId);
-        //q.setParameter(0, jCbListeEtablissement.getSelectedItem());
+        q.setParameter(0, sEtablissementId);
         Iterator eta = q.iterate();
-        while(eta.hasNext()){
+        while(eta.hasNext())
+            {
             Offre unoffre = (Offre) eta.next();
-            ((DefaultTableModel) jTable1.getModel()).addRow(new Object[] {unoffre.getId().getOffEtablissement(),unoffre.getId().getOffTypeChambre(), unoffre.getOffNbChambres()});
-
+            ((DefaultTableModel) jTblHebergement.getModel()).addRow(new Object[] {unoffre.getId().getOffEtablissement(),unoffre.getId().getOffTypeChambre(), unoffre.getOffNbChambres()});
+            }   
         }   
-        }
-          
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jCbListeEtablissement;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTblHebergement;
     private javax.swing.JButton jbtnModif;
     private javax.swing.JLabel jlblQuantite;
     private javax.swing.JTextField jtxtModif;
-    private javax.swing.JTextField jtxtModif1;
     // End of variables declaration//GEN-END:variables
 }
